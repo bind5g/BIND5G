@@ -1,0 +1,1490 @@
+openapi: 3.0.0
+info:
+  title: NaaS API (OSS/BSS & Manager)
+  description: This API provides inventory of the N-NaaS platform.
+  version: "1.0"
+servers:
+- url: /naas-api
+tags:
+- name: Tenant
+- name: Radio Client Resource
+- name: Radio Access Network Resource
+- name: Core Network Resource
+- name: Edge Compute Resource
+- name: Resource Telemetry
+- name: Application Instance
+paths:
+  /tenant:
+    get:
+      tags:
+      - Tenant
+      summary: Get tenant information
+      description: Tenant retrieval method
+      operationId: get_tenants
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseTenants'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.tenant_controller
+    post:
+      tags:
+      - Tenant
+      summary: Register a new tenant
+      description: Tenant registration method
+      operationId: post_tenant
+      requestBody:
+        description: The body of the request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TenantDescription'
+        required: true
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantResponse'
+        "400":
+          description: The server can’t return a response due to an error on the client’s
+            request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.tenant_controller
+  /tenant/{tenant_id}:
+    delete:
+      tags:
+      - Tenant
+      summary: Delete an tenant
+      description: Tenant deletion method
+      operationId: delete_tenant
+      parameters:
+      - name: tenant_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Request succeeded
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "501":
+          description: The server does not support the functionality required to fulfill
+            the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.tenant_controller
+  /compute:
+    get:
+      tags:
+      - Edge Compute Resource
+      summary: Get available computing assets information
+      description: Compute retrieval method
+      operationId: get_computes
+      parameters:
+      - name: tenant_id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseComputes'
+        "400":
+          description: The server can’t return a response due to an error on the client’s
+            request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.edge_compute_resource_controller
+    post:
+      tags:
+      - Edge Compute Resource
+      summary: Allocate a new compute resource
+      description: Compute registration method
+      operationId: post_compute
+      requestBody:
+        description: The body of the request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestNewCompute'
+        required: true
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseCompute'
+        "400":
+          description: The server can’t return a response due to an error on the client’s
+            request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "422":
+          description: The server was unable to process the instructions contained
+            in the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "503":
+          description: The server is unavailable to handle this request right now
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "504":
+          description: "The server, acting as a gateway, timed out waiting for another\
+            \ server to respond"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.edge_compute_resource_controller
+  /compute/{compute_id}:
+    delete:
+      tags:
+      - Edge Compute Resource
+      summary: Free a compute
+      description: Compute deletion method
+      operationId: delete_compute
+      parameters:
+      - name: compute_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Request succeeded
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "501":
+          description: The server does not support the functionality required to fulfill
+            the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.edge_compute_resource_controller
+  /compute/{compute_id}/action:
+    post:
+      tags:
+      - Edge Compute Resource
+      summary: Custom action on a compute resource
+      description: Custom action on a compute resource
+      operationId: action_compute
+      parameters:
+      - name: compute_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: The body of the request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customAction'
+        required: true
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseAction'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "501":
+          description: The server does not support the functionality required to fulfill
+            the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.edge_compute_resource_controller
+  /client_infrastructure:
+    get:
+      tags:
+      - Radio Client Resource
+      summary: Get available client infrastructures information
+      description: Client Infrastructure retrieval method
+      operationId: get_client_infrastructures
+      parameters:
+      - name: tenant_id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseClientInfrastructures'
+        "400":
+          description: The server can’t return a response due to an error on the client’s
+            request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.radio_client_resource_controller
+    post:
+      tags:
+      - Radio Client Resource
+      summary: Create a new Client infrastructure resource
+      description: Client Infrastructure registration method
+      operationId: post_client_infrastructure
+      requestBody:
+        description: The body of the request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestNewClient'
+        required: true
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseClientInfrastructure'
+        "400":
+          description: The server can’t return a response due to an error on the client’s
+            request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.radio_client_resource_controller
+  /client_infrastructure/{client_infrastructure_id}:
+    delete:
+      tags:
+      - Radio Client Resource
+      summary: Free a Client infrastructure
+      description: Client Infrastructure deletion method
+      operationId: delete_client_infrastructure
+      parameters:
+      - name: client_infrastructure_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Request succeeded
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "501":
+          description: The server does not support the functionality required to fulfill
+            the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.radio_client_resource_controller
+  /client_infrastructure/{client_infrastructure_id}/action:
+    post:
+      tags:
+      - Radio Client Resource
+      summary: Perform Action over Radio client resource
+      description: Perform custom acction over Radio client resource
+      operationId: action_client_infrastructure
+      parameters:
+      - name: client_infrastructure_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: The body of the request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customAction'
+        required: true
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseAction'
+        "400":
+          description: The server can’t return a response due to an error on the client’s
+            request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.radio_client_resource_controller
+  /ran_infrastructure:
+    get:
+      tags:
+      - Radio Access Network Resource
+      summary: Get available RAN infrastructures information
+      description: RAN Infrastructure retrieval method
+      operationId: get_ran_infrastructures
+      parameters:
+      - name: tenant_id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseRANInfrastructures'
+        "400":
+          description: The server can’t return a response due to an error on the client’s
+            request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.radio_access_network_resource_controller
+    post:
+      tags:
+      - Radio Access Network Resource
+      summary: Create a new RAN infrastructure resource
+      description: RAN Infrastructure registration method
+      operationId: post_ran_infrastructure
+      requestBody:
+        description: The body of the request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestNewRAN'
+        required: true
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseRANDescription'
+        "400":
+          description: The server can’t return a response due to an error on the client’s
+            request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.radio_access_network_resource_controller
+  /ran_infrastructure/{ran_infrastructure_id}/action:
+    post:
+      tags:
+      - Radio Access Network Resource
+      summary: Custom action on a RAN resource
+      description: Custom action on a RAN resource
+      operationId: action_ran_infrastructure
+      parameters:
+      - name: ran_infrastructure_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: The body of the request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customAction'
+        required: true
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseAction'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "501":
+          description: The server does not support the functionality required to fulfill
+            the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.radio_access_network_resource_controller
+  /ran_infrastructure/{ran_infrastructure_id}:
+    delete:
+      tags:
+      - Radio Access Network Resource
+      summary: Free a RAN infrastructure
+      description: RAN Infrastructure deletion method
+      operationId: delete_ran_infrastructure
+      parameters:
+      - name: ran_infrastructure_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Request succeeded
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "501":
+          description: The server does not support the functionality required to fulfill
+            the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.radio_access_network_resource_controller
+  /telemetry:
+    get:
+      tags:
+      - Resource Telemetry
+      summary: Get telemetry servers information
+      description: Telemetry servers retrieval method
+      operationId: get_telemetry_servers
+      parameters:
+      - name: tenant_id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTelemetryServers'
+        "400":
+          description: The server can’t return a response due to an error on the client’s
+            request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.resource_telemetry_controller
+  /core_network:
+    get:
+      tags:
+      - Core Network Resource
+      summary: Gets core_network information
+      description: Core Network retrieval method
+      operationId: get_core_networks
+      parameters:
+      - name: tenant_id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          description: Core Network Services owned by tenant with tenant_id
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseCoreNetworks'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.core_network_resource_controller
+    post:
+      tags:
+      - Core Network Resource
+      summary: Register a new core network resource
+      description: Core Network registration method
+      operationId: post_core_network
+      requestBody:
+        description: The body of the request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestNewCoreNetwork'
+        required: true
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseCoreNetwork'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.core_network_resource_controller
+  /core_network/{core_network_id}:
+    delete:
+      tags:
+      - Core Network Resource
+      summary: Free a core network infrastructure
+      description: Core network deletion method
+      operationId: delete_core_network
+      parameters:
+      - name: core_network_id
+        in: path
+        description: core_network_id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Request succeeded
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.core_network_resource_controller
+  /core_network/{core_network_id}/action:
+    post:
+      tags:
+      - Core Network Resource
+      summary: Perform Action over Core Network resource
+      description: Perform custom acction over Core Network resource
+      operationId: action_core
+      parameters:
+      - name: core_network_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: The body of the request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customAction'
+        required: true
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseAction'
+        "400":
+          description: The server can’t return a response due to an error on the client’s
+            request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.core_network_resource_controller
+  /application_instance:
+    get:
+      tags:
+      - Application Instance
+      summary: Get application instances information
+      description: Application instances retrieval method
+      operationId: get_application_instances
+      parameters:
+      - name: tenant_id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseApplicationInstances'
+        "400":
+          description: The server can’t return a response due to an error on the client’s
+            request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.application_instance_controller
+    post:
+      tags:
+      - Application Instance
+      summary: Create a new application instance
+      description: Application instance registration method
+      operationId: post_application_instance
+      requestBody:
+        description: The body of the request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestNewApplicationInstance'
+        required: true
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseApplicationInstance'
+        "400":
+          description: The server can’t return a response due to an error on the client’s
+            request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.application_instance_controller
+  /application_instance/{application_instance_id}:
+    get:
+      tags:
+      - Application Instance
+      summary: Get individual application instance information
+      description: Individual application instance retrieval method
+      operationId: get_application_instance
+      parameters:
+      - name: application_instance_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: tenant_id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseApplicationInstance'
+        "400":
+          description: The server can’t return a response due to an error on the client’s
+            request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.application_instance_controller
+    delete:
+      tags:
+      - Application Instance
+      summary: Delete a application instance
+      description: Application instance deletion method
+      operationId: delete_application_instance
+      parameters:
+      - name: application_instance_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Request succeeded
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "501":
+          description: The server does not support the functionality required to fulfill
+            the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.application_instance_controller
+  /application_instance/{application_instance_id}/scale:
+    post:
+      tags:
+      - Application Instance
+      summary: Scale individual application instance
+      description: Application instance scaling method
+      operationId: scale_application_instance
+      parameters:
+      - name: application_instance_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: The body of the request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationInstanceScaleInput'
+        required: true
+      responses:
+        "204":
+          description: Request succeeded
+        "400":
+          description: The server can’t return a response due to an error on the client’s
+            request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.application_instance_controller
+  /application_instance/{application_instance_id}/action:
+    post:
+      tags:
+      - Application Instance
+      summary: Perform Action over Application instance
+      description: Perform custom acction over Application instance
+      operationId: action_application_instance
+      parameters:
+      - name: application_instance_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: The body of the request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customAction'
+        required: true
+      responses:
+        "200":
+          description: Request succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseAction'
+        "400":
+          description: The server can’t return a response due to an error on the client’s
+            request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: The server couldn’t process the request because there’s a conflict
+            with the relevant resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      x-openapi-router-controller: swagger_server.controllers.application_instance_controller
+components:
+  schemas:
+    TenantResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          example: handover
+        description:
+          type: string
+          example: Sample tenant for handover
+        id:
+          type: string
+          example: 5b62faa058f5682e3b0da3f1
+      example:
+        name: handover
+        description: Sample tenant for handover
+        id: 5b62faa058f5682e3b0da3f1
+    ResponseTenants:
+      type: array
+      items:
+        $ref: '#/components/schemas/TenantResponse'
+    TenantDescription:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Handover
+        description:
+          type: string
+          example: Sample description for handover tenant
+    ResponseComputes:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResponseCompute'
+    ComputeDescription:
+      type: object
+      properties:
+        compute_type:
+          type: string
+          example: openstack|k8s|osm
+        compute_data:
+          $ref: '#/components/schemas/ComputeDescription_compute_data'
+    RequestNewCompute:
+      type: object
+      properties:
+        tenant_id:
+          type: string
+          example: 5b63089158f568073093f70d
+        compute_description:
+          $ref: '#/components/schemas/ComputeDescription'
+    ResponseCompute:
+      type: object
+      properties:
+        compute_id:
+          type: string
+          example: 1221ewewr11221
+        compute_infrastructure:
+          $ref: '#/components/schemas/ComputeDescription'
+      example:
+        compute_infrastructure:
+          compute_data:
+            cpus: 4
+            storage: 20
+            ram: 512
+          compute_type: openstack|k8s|osm
+        compute_id: 1221ewewr11221
+    ResponseClientInfrastructures:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResponseClientInfrastructure'
+    ClientDescription:
+      type: object
+      properties:
+        type:
+          type: string
+          example: amarisoft
+        mode:
+          type: string
+          example: 5gnsa
+        frequency:
+          type: integer
+          example: 3900
+        bandwidth:
+          type: integer
+          example: 20
+        uenumber:
+          type: integer
+          example: 7
+        extraParams:
+          type: object
+      example:
+        mode: 5gnsa
+        bandwidth: 20
+        extraParams: {}
+        type: amarisoft
+        uenumber: 7
+        frequency: 3900
+    RequestNewClient:
+      type: object
+      properties:
+        tenant_id:
+          type: string
+          example: 5b63089158f568073093f70d
+        client_description:
+          $ref: '#/components/schemas/ClientDescription'
+    ResponseClientInfrastructure:
+      type: object
+      properties:
+        client_id:
+          type: string
+          example: aa7676a8
+        client_infrastructure:
+          $ref: '#/components/schemas/ClientDescription'
+      example:
+        client_infrastructure:
+          mode: 5gnsa
+          bandwidth: 20
+          extraParams: {}
+          type: amarisoft
+          uenumber: 7
+          frequency: 3900
+        client_id: aa7676a8
+    ResponseRANInfrastructures:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResponseRANDescription'
+    RANDescripion:
+      type: object
+      properties:
+        type:
+          type: string
+          example: amarisoft
+        mode:
+          type: string
+          example: 5gnsa
+        frequency:
+          type: integer
+          example: 3900
+        bandwidth:
+          type: integer
+          example: 20
+        core_id:
+          type: string
+          example: 5b63089158f568073093f70d
+        extraParams:
+          type: object
+      example:
+        mode: 5gnsa
+        core_id: 5b63089158f568073093f70d
+        bandwidth: 20
+        extraParams: {}
+        type: amarisoft
+        frequency: 3900
+    RequestNewRAN:
+      type: object
+      properties:
+        tenant_id:
+          type: string
+          example: 5b63089158f568073093f70d
+        RAN_description:
+          $ref: '#/components/schemas/RANDescripion'
+    ResponseRANDescription:
+      type: object
+      properties:
+        ran_id:
+          type: string
+          example: 5b63089158f568073093f70d
+        ran_infrastructure_data:
+          $ref: '#/components/schemas/RANDescripion'
+      example:
+        ran_id: 5b63089158f568073093f70d
+        ran_infrastructure_data:
+          mode: 5gnsa
+          core_id: 5b63089158f568073093f70d
+          bandwidth: 20
+          extraParams: {}
+          type: amarisoft
+          frequency: 3900
+    GetTelemetryServers:
+      type: array
+      items:
+        $ref: '#/components/schemas/TelemetryServer'
+    TelemetryServerInput:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Barcelona
+        tenant_id:
+          type: string
+          example: 5b63089158f568073093f70d
+        telemetry_server_data:
+          $ref: '#/components/schemas/TelemetryServerInput_telemetry_server_data'
+    TelemetryServer:
+      type: object
+      properties:
+        telemetry_server_data:
+          $ref: '#/components/schemas/TelemetryServerInput_telemetry_server_data'
+      example:
+        telemetry_server_data:
+          server_description: telemetry server for experiment
+          server_ip: 192.168.11.23
+          server_port: "4400"
+    ResponseCoreNetworks:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResponseCoreNetwork'
+    CoreNetworkDescription:
+      type: object
+      properties:
+        type:
+          type: string
+          example: open5gs
+        mode:
+          type: string
+          example: epc
+        extraParams:
+          type: object
+      example:
+        mode: epc
+        extraParams: {}
+        type: open5gs
+    RequestNewCoreNetwork:
+      type: object
+      properties:
+        tenant_id:
+          type: string
+          example: 5b8cf41758f56870ed0d0c7f
+        core_network_description:
+          $ref: '#/components/schemas/CoreNetworkDescription'
+    ResponseCoreNetwork:
+      properties:
+        core_id:
+          type: string
+          example: 5b63089158f568073093f70d
+        core_network_description:
+          $ref: '#/components/schemas/CoreNetworkDescription'
+      example:
+        core_id: 5b63089158f568073093f70d
+        core_network_description:
+          mode: epc
+          extraParams: {}
+          type: open5gs
+    ResponseApplicationInstances:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResponseApplicationInstance'
+    ApplicationDescription:
+      type: object
+      properties:
+        compute_id:
+          type: string
+          example: 5b63089158f568073093f70d
+        application_name:
+          type: string
+          example: My application
+        image_name:
+          type: string
+          example: nginx
+        ports:
+          type: array
+          items:
+            type: integer
+            example: 80
+        extraParams:
+          type: object
+      example:
+        image_name: nginx
+        application_name: My application
+        compute_id: 5b63089158f568073093f70d
+        extraParams: {}
+        ports:
+        - 80
+        - 80
+    RequestNewApplicationInstance:
+      type: object
+      properties:
+        tenant_id:
+          type: string
+          example: 5b63089158f568073093f70d
+        application_description:
+          $ref: '#/components/schemas/ApplicationDescription'
+    ResponseApplicationInstance:
+      type: object
+      properties:
+        application_id:
+          type: string
+          example: 5b63089158f568073093f70d
+        status:
+          type: string
+          example: deployed
+        application_Description:
+          $ref: '#/components/schemas/ApplicationDescription'
+      example:
+        application_id: 5b63089158f568073093f70d
+        status: deployed
+        application_Description:
+          image_name: nginx
+          application_name: My application
+          compute_id: 5b63089158f568073093f70d
+          extraParams: {}
+          ports:
+          - 80
+          - 80
+    ApplicationInstanceScaleInput:
+      type: object
+      properties:
+        scaletype:
+          type: string
+          example: verticalup|verticaldown|horizontalup|horizontaldown
+        replicas:
+          type: integer
+          example: 4
+        new_cpu:
+          type: string
+          example: 200millicores
+        new_memory:
+          type: string
+          example: 50Mi
+    customAction:
+      type: object
+      properties:
+        actionType:
+          type: string
+          example: configure
+        actionParameters:
+          type: object
+    ResponseAction:
+      type: object
+      properties:
+        actionId:
+          type: string
+          example: aa12da1
+      example:
+        actionId: aa12da1
+    ErrorMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Error message
+    ComputeDescription_compute_data:
+      type: object
+      properties:
+        ram:
+          type: integer
+          description: MB
+          example: 512
+        cpus:
+          type: integer
+          example: 4
+        storage:
+          type: integer
+          description: GB
+          example: 20
+        extraParams:
+          type: object
+          example: {}
+      example:
+        cpus: 4
+        storage: 200
+        ram: 512
+        extraParams: {}
+    TelemetryServerInput_telemetry_server_data:
+      type: object
+      properties:
+        server_ip:
+          type: string
+          example: 192.168.11.23
+        server_port:
+          type: string
+          example: "4400"
+        server_description:
+          type: string
+          example: telemetry server for experiment
+      example:
+        server_description: telemetry server for experiment
+        server_ip: 192.168.11.23
+        server_port: "4400"
+  responses:
+    BadRequest:
+      description: The server can’t return a response due to an error on the client’s
+        request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    NotFound:
+      description: The requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    Conflict:
+      description: The server couldn’t process the request because there’s a conflict
+        with the relevant resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    UnprocessableEntity:
+      description: The server was unable to process the instructions contained in
+        the request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    InternalServerError:
+      description: There was an error on the server and the request could not be completed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    NotImplemented:
+      description: The server does not support the functionality required to fulfill
+        the request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    ServiceUnavailable:
+      description: The server is unavailable to handle this request right now
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    GatewayTimeout:
+      description: "The server, acting as a gateway, timed out waiting for another\
+        \ server to respond"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+
