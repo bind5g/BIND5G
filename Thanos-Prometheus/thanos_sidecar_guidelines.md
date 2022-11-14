@@ -78,7 +78,7 @@ helm repo update`
 
  - [ ] Change directory to the one where the prometheus-with-sidecar-thanos-values.yaml file is `cd path/prometheus-with-sidecar-thanos-values.yaml`
  
- - [ ] Install Helm Chart or Upgrade:
+ - [ ] Install Helm Chart:
  `helm install [RELEASE_NAME] prometheus-community/kube-prometheus-stack -n monitoring -f prometheus-with-sidecar-thanos-values.yaml`
 In case Prometheus is already running on the cluster and has been installed by the kube-prometheus-stack helm chart, it can be upgraded with the `helm upgrade` command and the prometheus-with-sidecar-thanos-values.yaml file. 
  `helm upgrade [RELEASE_NAME] prometheus-community/kube-prometheus-stack -n monitoring -f prometheus-with-sidecar-thanos-values.yaml`
