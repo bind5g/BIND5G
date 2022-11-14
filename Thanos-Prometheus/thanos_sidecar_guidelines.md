@@ -22,7 +22,7 @@ The following steps show the configuration that needs to be done in a helm-chart
 	type: S3
 	config:
 	  bucket: thanos
-	  endpoint: 192.168.14.211:9000
+	  endpoint: 192.168.14.191:10904
 	  access_key: BIND5GKEY
 	  secret_key: BIND5GSECRET
 	  insecure: true
@@ -78,10 +78,11 @@ helm repo update`
 
  - [ ] Change directory to the one where the prometheus-with-sidecar-thanos-values.yaml file is `cd path/prometheus-with-sidecar-thanos-values.yaml`
  
- - [ ] Install Helm Chart or Upgrade:
+ - [ ] Install Helm Chart:
  `helm install [RELEASE_NAME] prometheus-community/kube-prometheus-stack -n monitoring -f prometheus-with-sidecar-thanos-values.yaml`
+In case Prometheus is already running on the cluster and has been installed by the kube-prometheus-stack helm chart, it can be upgraded with the `helm upgrade` command and the prometheus-with-sidecar-thanos-values.yaml file. 
  `helm upgrade [RELEASE_NAME] prometheus-community/kube-prometheus-stack -n monitoring -f prometheus-with-sidecar-thanos-values.yaml`
-In case Prometheus is already running on the cluster and has been installed by the kube-prometheus-stack helm chart, it can be upgraded with the `helm upgrade` command and the prometheus-with-sidecar-thanos-values.yaml file. Note, that any Grafana dashboard will be deleted if no persistance has been enabled. 
+Note, that any Grafana dashboard will be deleted if no persistance has been enabled. 
  - [ ] Finally, share the new Thanos Sidecar Service nodeIP/nodePort in order to be used later for the Thanos Query: 
  ` kubectl get service -n monitoring | grep thanos-discovery`
 
