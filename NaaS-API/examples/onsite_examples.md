@@ -45,7 +45,14 @@
 						"enable": "False",
 						"interval": ""
 						},
-					"env": []
+					"env": [],
+					"helm_chart": {
+ 						"enable": "False",
+ 						"kns_name": "",
+ 						"nsd_name": "",
+ 						"vim_name": "",
+ 						"k8s_namespace": ""
+ 							}
 				},
 				"image_name": "nginx",
 				"ports": [8080]
@@ -168,7 +175,14 @@
 						"enable": "False",
 						"interval": ""
 						},
-					"env": []
+					"env": [],
+					"helm_chart": {
+ 						"enable": "False",
+ 						"kns_name": "",
+ 						"nsd_name": "",
+ 						"vim_name": "",
+ 						"k8s_namespace": ""
+ 							}
 				},
 				"image_name": "gcr.io/google-samples/node-hello:1.0",
 				"ports": [8080]
