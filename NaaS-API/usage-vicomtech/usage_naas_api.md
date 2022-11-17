@@ -102,6 +102,7 @@ The **POST/compute** request results in the creation of the Edge resources with 
 	| container_cpu_request| *string* | "40m" | units in millicores
 	| container_ram_request|  *string* | "25Mi" | units in Mebibytes
 	| servicemonitor | *{}*| {"enable": "True", "interval": "5s"} | for Prometheus exporter or Pushgateways to connect the metrics to a Prometheus server
+	| helm_chart | *{}*| {"enable": "False", "kns_name": "", "nsd_name": "", "vim_name": "", "k8s_namespace": ""} | Deployment of Helm-Charts, If "enable" is "True". kns_name value must be the same as the application_name parameters, and k8s_namespace value must be the same as the compute_id parameter
 
 > NOTE: The application can contain only one container. Pairs of the extraParams that are not necessary can be deleted.
 
