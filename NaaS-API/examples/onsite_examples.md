@@ -3,11 +3,18 @@
 **Deploy Edge & Containerized Applications (Tenant + Edge + Application Resources)**
 
 	
-	 - [ ] Navigate to the NaaS-API UI with your preferred browser:
+- [ ] Navigate to the NaaS-API UI with your preferred browser:
 	 `http://192.168.14.168:9191/v0/ui`
-	 - [ ] Create a Tenant: POST/tenant request
-	 - [ ] Create Edge Resources: POST/compute request with the following body request:
-		```
+- [ ] Create a Tenant: POST/tenant request with the following body request:
+	```
+	{
+	  "description": "Example Edge BIND5G experiment ",
+	  "name": "edge_bind5g"
+	}
+	```
+
+- [ ] Create Edge Resources: POST/compute request with the following body request:
+	```
 		{	
 			"compute_description": {
 				"compute_data": {
@@ -20,11 +27,11 @@
 			},
 			"tenant_id": "123456789"
 		}
-		```
+	```
 
  - [ ] Create a web application in the Edge Resources: POST/application_instance request with the following body:
 
-		```
+	```
 		{
 			"application_description": {
 				"application_name": "nginx-test",
@@ -59,7 +66,7 @@
 			},
 			"tenant_id": "123456789"
 		}
-		```
+	```
 
  **Monitor and scale containers running on the Edge (Tenant + Edge + Application + Telemetry Resources)**
 
@@ -80,63 +87,69 @@
 	```
 	
 
-  **Connect a UE to a web-app running on the Edge over a 5G mobile network**
+  **Connect a UE to a web-app running on the Edge over a 5G SA mobile network**
 
-	 - [ ] Navigate to the NaaS-API UI with your preferred browser:
+ - [ ] Navigate to the NaaS-API UI with your preferred browser:
 	 `http://192.168.14.168:9191/v0/ui`
-	 - [ ] Create a Tenant: POST/tenant request
-	 - [ ] Create  a Core Network: POST/core_network request with the following body request:
-		```
+ - [ ] Create a Tenant: POST/tenant request
+	```
+	{
+	  "description": "Example E2E BIND5G experiment ",
+	  "name": "edge_amarisoft_bind5g"
+	}
+	```
+ - [ ] Create  a Core Network: POST/core_network request with the following body request:
+	```
 		{
 			"core_network_description": {
 			"extraParams": {},
-			"mode": "HoSA",
+			"mode": "5gSA",
 			"type": "amarisoft"
 			},
 			"tenant_id": ""
 		}
-		```
+	```
 
-	- [ ] Create a Radio Access Network: POST/radio_infrastructure request with the following body request:
-		 ```
+ - [ ] Create a Radio Access Network: POST/radio_infrastructure request with the following body request:
+	```
 		{
 			"RAN_description": { 
 				"bandwidth": 20,
 				"core_id": "5b63089158f568073093f70d"
 				"extraParams": {},
 				"frequency": 3900,
-				"mode": "HoSA",
+				"mode": "5gSA",
 				"type": "amarisoft"
 				}
 			"tenant_id": "123456789"
 		}
-		```
+	```
 
-	 - [ ] Create a Radio Client: POST/client_infrastructure request with the following body request:
-		```
+ - [ ] Create a Radio Client: POST/client_infrastructure request with the following body request:
+	```
 		{
 			"client_description": { 
 				"bandwidth": 20,
 				"extraParams": {},
 				"frequency": 3900,
-				"mode": "HoSA",
+				"mode": "5gSA",
 				"type": "amarisoft"
 				"uenumber": 7
 				}
 			"tenant_id": "123456789"
 		}
-		```
+	```
 
-	 - [ ] Add (activate) a UE from the Radio Client infrastructure: POST/client_infrastructure/{uesimbox}/action request with the following body request:
-		 ```
+ - [ ] Add (activate) a UE from the Radio Client infrastructure: POST/client_infrastructure/{uesimbox}/action request with the following body request:
+	```
 		 {
 			 "actionParameters": {"ueID":"1"},
 			 "actionType": "power_on"
 		}
-		```
-
-	 - [ ] Create Edge Resources: POST/compute request with the following body request:
-		```
+   ```
+ 
+ - [ ] Create Edge Resources: POST/compute request with the following body request:
+	```
 		{	
 			"compute_description": {
 				"compute_data": {
@@ -149,11 +162,11 @@
 			},
 			"tenant_id": "123456789"
 		}
-		```
+	```
 
-	 - [ ] Create a web application in the Edge Resources: POST/application_instance request with the following body:
+- [ ] Create a web application in the Edge Resources: POST/application_instance request with the following body:
 
-		```
+	```
 		{
 			"application_description": {
 				"application_name": "hello-kubernetes",
@@ -189,16 +202,16 @@
 			},
 			"tenant_id": "123456789"
 		}
-		```
+	```
 
-	 - [ ] Read the information of the created application and look for the IP and port (nodePort) to access it from your browser at `http://192.168.14.211:26379` or generate traffic outside of the cluster: GET/application_instance/{application_instance_id}, GET/compute requests.
+- [ ] Read the information of the created application and look for the IP and port (nodePort) to access it from your browser at `http://192.168.14.211:26379` or generate traffic outside of the cluster: GET/application_instance/{application_instance_id}, GET/compute requests.
 
-	 - [ ] Test connection between UE and web-app by performing a wget request from the UE: POST/client_infrastructure/{uesimbox}/action request with the following body request:
-		 ```
+- [ ] Test connection between UE and web-app by performing a wget request from the UE: POST/client_infrastructure/{uesimbox}/action request with the following body request:
+	```
 		{
 				 "actionParameters": {"ueID":"1", "params": "['192.168.14.211:26379']", "type":"WebData"},
 				 "actionType": "start_traffic"
 		}
-		```
+	```
 
 
