@@ -1,0 +1,1 @@
+f8d2090b6e5d8762e2a07b36d99f6ff0	nginx_nsd.yaml

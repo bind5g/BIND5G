@@ -1,0 +1,1 @@
+ffd87272043352edbeb19767d48d1cea	nginx_knfd.yaml
