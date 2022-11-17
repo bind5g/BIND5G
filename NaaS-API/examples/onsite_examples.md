@@ -1,4 +1,4 @@
-﻿## Examples
+﻿## Examples in one testbed
 
 **Deploy Edge & Containerized Applications (Tenant + Edge + Application Resources)**
 
