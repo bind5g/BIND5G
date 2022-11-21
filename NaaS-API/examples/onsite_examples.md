@@ -42,7 +42,7 @@
 						},
 					"replicas" : 1,
 					"service_type": "ClusterIP",
-					"service_ports": [
+					"service_ports": [[
 						{"port": 8080},
 						{"targetPort": 8080},
 						{"name": "external"},
@@ -177,7 +177,7 @@
 						},
 					"replicas" : 1,
 					"service_type": "NodePort",
-					"service_ports": [
+					"service_ports": [[
 						{"port": 8080},
 						{"targetPort": 8080},
 						{"name": "external"},
