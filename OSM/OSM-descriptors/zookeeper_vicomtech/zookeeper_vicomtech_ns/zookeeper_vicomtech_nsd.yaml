@@ -1,0 +1,24 @@
+nsd:
+    nsd:
+    -   description: Network Service for zookeeper_vicomtech KNF
+        designer: Vicomtech-BIND5G
+        df:
+        -   id: mgmt-df
+            vnf-profile:
+            -   id: '1'
+                virtual-link-connectivity:
+                -   constituent-cpd-id:
+                    -   constituent-base-element-id: '1'
+                        constituent-cpd-id: mgmtnet
+                    virtual-link-profile-id: mgmtnet
+                vnfd-id: zookeeper_vicomtech_knf
+        id: zookeeper_vicomtech_ns
+        name: zookeeper_vicomtech_ns
+        version: '1.0'
+        virtual-link-desc:
+        -   id: mgmtnet
+            mgmt-network: 'true'
+            vim-network-name: mgmt
+        vnfd-id:
+        - zookeeper_vicomtech_knf
+

@@ -1,0 +1,17 @@
+vnfd:
+    description: KNF descriptor with kafka chart
+    df:
+    -   id: mgmt-df
+    ext-cpd:
+    -   id: mgmtnet
+        k8s-cluster-net: mgmt
+    id: kafka_vicomtech_knf
+    k8s-cluster:
+        nets:
+        -   id: mgmtnet
+    kdu:
+    -   helm-chart: Helm-Repo-BIND5G/kafka
+        name: kafka_vicomtech
+    mgmt-cp: mgmt
+    product-name: kafka_vicomtech_knf
+    version: '1.0'

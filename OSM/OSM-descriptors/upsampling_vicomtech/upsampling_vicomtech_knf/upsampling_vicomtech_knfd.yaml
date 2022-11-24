@@ -1,0 +1,17 @@
+vnfd:
+    description: KNF descriptor with upsampling chart
+    df:
+    -   id: mgmt-df
+    ext-cpd:
+    -   id: mgmtnet
+        k8s-cluster-net: mgmt
+    id: upsampling_vicomtech_knf
+    k8s-cluster:
+        nets:
+        -   id: mgmtnet
+    kdu:
+    -   helm-chart: Helm-Repo-BIND5G/upsampling
+        name: upsampling_vicomtech
+    mgmt-cp: mgmt
+    product-name: upsampling_vicomtech_knf
+    version: '1.0'

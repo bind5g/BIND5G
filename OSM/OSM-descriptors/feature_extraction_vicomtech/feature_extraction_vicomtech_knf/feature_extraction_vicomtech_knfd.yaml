@@ -1,0 +1,17 @@
+vnfd:
+    description: KNF descriptor with feature_extraction chart
+    df:
+    -   id: mgmt-df
+    ext-cpd:
+    -   id: mgmtnet
+        k8s-cluster-net: mgmt
+    id: feature_extraction_vicomtech_knf
+    k8s-cluster:
+        nets:
+        -   id: mgmtnet
+    kdu:
+    -   helm-chart: Helm-Repo-BIND5G/feature-extraction
+        name: feature_extraction_vicomtech
+    mgmt-cp: mgmt
+    product-name: feature_extraction_vicomtech_knf
+    version: '1.0'
