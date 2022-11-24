@@ -1,9 +1,42 @@
 apiVersion: v1
 entries:
+  feature_extraction:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-11-24T15:57:46.69935926+01:00"
+    description: A Helm chart for Kubernetes
+    digest: 938e9a8988ce0ab68816513156c3d5f678821a698e85b8b24e8998c292e4062b
+    name: feature_extraction
+    type: application
+    urls:
+    - feature-extraction-0.1.0.tgz
+    version: 0.1.0
+  kafka:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-11-24T15:57:46.69964192+01:00"
+    description: A Helm chart for Kubernetes
+    digest: 062d4f2e3c32cb158fdf936a3ca80eedfb0de3602a562944fb045edf2b26dc3b
+    name: kafka
+    type: application
+    urls:
+    - kafka-0.1.0.tgz
+    version: 0.1.0
+  ml:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-11-24T15:57:46.699892182+01:00"
+    description: A Helm chart for Kubernetes
+    digest: db1a69dd05c7244f7055453728c28d88d8ccaca97c0d5ab1ed1938f702db162c
+    name: ml
+    type: application
+    urls:
+    - ml-0.1.0.tgz
+    version: 0.1.0
   nginx-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-11-11T14:13:58.952083547+01:00"
+    created: "2022-11-24T15:57:46.776260565+01:00"
     description: A Helm chart for Kubernetes
     digest: 168743b0ec846e248eb33d389cee70714579e320fa0c4436a35158cc44f31efa
     name: nginx-chart
@@ -11,4 +44,37 @@ entries:
     urls:
     - nginx-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2022-11-11T14:13:58.95133787+01:00"
+  pushgateway:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-11-24T15:57:46.776535712+01:00"
+    description: A Helm chart for Kubernetes
+    digest: c6618f9c78b9e7f8477ca673a082b46fbabe6dc2f79dc0fdf8e226f8428cdfe0
+    name: pushgateway
+    type: application
+    urls:
+    - pushgateway-0.1.0.tgz
+    version: 0.1.0
+  upsampling:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-11-24T15:57:46.776758026+01:00"
+    description: A Helm chart for Kubernetes
+    digest: 4485e99f6084e03ce16dce34512331aa21109388620b9c43481981e512c69777
+    name: upsampling
+    type: application
+    urls:
+    - upsampling-0.1.0.tgz
+    version: 0.1.0
+  zookeeper:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-11-24T15:57:46.776981441+01:00"
+    description: A Helm chart for Kubernetes
+    digest: df1c01f7895c055be46f50356ffa53de9da25151af1462476a8e765a50b2d960
+    name: zookeeper
+    type: application
+    urls:
+    - zookeeper-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-11-24T15:57:46.698947931+01:00"
