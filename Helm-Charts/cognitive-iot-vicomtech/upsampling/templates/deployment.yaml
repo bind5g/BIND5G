@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: upsampling
+  name: upsampling-deploy
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: upsampling
+  template:
+    metadata:
+      labels:
+        app: upsampling
+    spec:
+      containers:
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: upsampling
+        env:
+        - name: ENV
+          value: Docker
+        ports:
+        - containerPort: 8080

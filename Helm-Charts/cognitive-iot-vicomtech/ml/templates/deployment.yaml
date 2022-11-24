@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mlmodel
+  name: mlmodel-deploy
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: mlmodel
+  template:
+    metadata:
+      labels:
+        app: mlmodel
+    spec:
+      containers:
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: mlmodel
+        env:
+        - name: ENV
+          value: Docker
+        ports:
+        - containerPort: 8080
+      

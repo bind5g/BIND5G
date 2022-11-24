@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: feature-extraction
+  name: feature-extraction-deploy
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: feature-extraction
+  template:
+    metadata:
+      labels:
+        app: feature-extraction
+    spec:
+      containers:
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: feature-extraction
+        env:
+        - name: ENV
+          value: Docker
+        ports:
+        - containerPort: 8080
+     

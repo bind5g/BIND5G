@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-broker2
+  labels:
+    name: kafka
+spec:
+  ports:
+  - port: 1234
+    targetPort: 1234
+    name: metrics
+    protocol: TCP
+  - port: 9092
+    targetPort: 9092
+    name: kafka-port-internal
+    protocol: TCP
+  - port: 29093
+    targetPort: 29093
+    name: kafka-port-external
+    nodePort: 29093
+  selector:
+    app: kafka
+    id: "0"
+  type: {{ .Values.service.type }}

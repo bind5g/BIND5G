@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: kafka-metrics
+  labels:
+    app: kafka-metrics
+    release: prometheus-bind5g-vicomtech
+spec:
+  selector:
+    matchLabels:
+      name: kafka
+  endpoints:
+  - port: metrics
+    path: /metrics
+    interval: 10s

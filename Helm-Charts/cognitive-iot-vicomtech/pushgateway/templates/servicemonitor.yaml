@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: pushgateway
+  labels:
+    app: pushgateway
+    release: prometheus-bind5g-vicomtech
+spec:
+  selector:
+    matchLabels:
+      app: pushgateway
+  endpoints:
+  - port: metrics
+    path: /metrics
+    interval: 0s200ms
