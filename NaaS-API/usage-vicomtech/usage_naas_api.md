@@ -42,7 +42,7 @@ The **POST/ran_infrastructure** request results in the creation of the gNB with 
 	| Name | Value type| Example| Comments
 	|--|--|--|--|
 	|  mode| *string* | "HoSA"| can be either "HoSA" or "Ho4g" or "5gSA" or "5gNSA" or "Slice"
-	| type|*string*| "amarisoft" | can be anything, but descriptive
+	| type|*string*| "amarisoft" | must be "amarisoft"
 	| frequency| *integer*| 20| Units in MHz
 	| bandwidth| *integer* |3900 | Units in Hz
 	| uenumber| *integer* |7| Total available number of UEs to be launched
@@ -85,7 +85,7 @@ The **POST/compute** request results in the creation of the Edge resources with 
 	| Name | Value type| Example| Comments
 	|--|--|--|--|
 	|  application_name| *string* | "hello-world"| must be a lowercase string giving the name of the application to be deployed
-	| image_name|*string*|  | image name from an online public or private container registry 
+	| image_name|*string*| gcr.io/google-samples/node-hello:1.0 | image name from an online public container registry 
 	| ports| *list with integers*| [80]| the container´s port to be exposed
 	| extraParams|*{}*| - |extraParams is a json dictionary and is described in a seperate table below	
 
@@ -97,7 +97,7 @@ The **POST/compute** request results in the creation of the Edge resources with 
 	| replicas| *integer* | 1 | number of container replicas
 	| env| *list*| [[{"name":"DEMO_GREETING"},{"value":"Hello World"}]]| environment variable for a container
 	| service_type| *string*| "NodePort"| must be either ClusterIP or NodePort
-	| service_ports| *list*| [[{"port": 80}, {"targetPort": 80}, {"name": "external"}, {"nodePort": 26379 }]] | Kubernetes-based Service ports. If service_type is ClusterID the "nodePort" pair is not needed
+	| service_ports| *list*| [[{"port": 80}, {"targetPort": 80}, {"name": "external"}, {"nodePort": 26379 }]] | Kubernetes-based Service ports. If service_type is ClusterID the "nodePort" pair is not needed. If service_type is NodePort and more than one ports are defined, not exposed ports must have "nodePort" : 0. If one of the ports need to be used in a servicemonitor manifest then it must be the first of the port list.
 	| container_cpu_limit| *string* | "80m" | units in millicores
 	| container_ram_limit| *string* | "50Mi" | units in Mebibytes
 	| container_cpu_request| *string* | "40m" | units in millicores
