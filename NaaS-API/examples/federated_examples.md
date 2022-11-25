@@ -2,6 +2,7 @@
 
 **Connect a UE to a web-app running on the Federated Edge over a 5G SA mobile network**
 
+ SITE 1
  - [ ] Navigate to the NaaS-API UI with your preferred browser:
 	 `http://192.168.14.168:9191/v0/ui`
  - [ ] Create a Tenant: POST/tenant request
@@ -61,6 +62,8 @@
 		}
    ```
  
-  - [ ] Navigate to the NaaS-API UI with your preferred browser:
+ SITE 2
+ 
+ - [ ] Navigate to the NaaS-API UI with your preferred browser:
 	 `http://testbed2_ip:testbed2_port/v0/ui`
 - [ ] Create Edge Resources: POST/compute request with the following body request:
