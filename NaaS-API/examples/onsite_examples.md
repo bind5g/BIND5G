@@ -13,7 +13,7 @@
 	}
 	```
 
-- [ ] Create Edge Resources: POST/compute request with the following body request:
+- [ ] Create Edge Resources: POST/compute request with tenant_id from the response of the previous step and with the following body request:
 	```
 		{	
 			"compute_description": {
@@ -29,7 +29,7 @@
 		}
 	```
 
- - [ ] Create a web application in the Edge Resources: POST/application_instance request with the following body:
+ - [ ] Create a web application in the Edge Resources: POST/application_instance request with tenant_id from the response of the first step, compute_id from the repsonse of the POST/compute step, and with the following body:
 
 	```
 		{
@@ -98,7 +98,7 @@
 	  "name": "edge_amarisoft_bind5g"
 	}
 	```
- - [ ] Create  a Core Network: POST/core_network request with the following body request:
+ - [ ] Create  a Core Network: POST/core_network request with the tenant_id of the response of the previous step and with the following body request:
 	```
 		{
 			"core_network_description": {
@@ -110,7 +110,7 @@
 		}
 	```
 
- - [ ] Create a Radio Access Network: POST/radio_infrastructure request with the following body request:
+ - [ ] Create a Radio Access Network: POST/radio_infrastructure request with the tenant_id of the first step and with the following body request:
 	```
 		{
 			"RAN_description": { 
@@ -125,7 +125,7 @@
 		}
 	```
 
- - [ ] Create a Radio Client: POST/client_infrastructure request with the following body request:
+ - [ ] Create a Radio Client: POST/client_infrastructure request with the tenant_id of the first step and with the following body request:
 	```
 		{
 			"client_description": { 
@@ -148,7 +148,7 @@
 		}
    ```
  
- - [ ] Create Edge Resources: POST/compute request with the following body request:
+ - [ ] Create Edge Resources: POST/compute request with the tenant_id of the first step and with the following body request:
 	```
 		{	
 			"compute_description": {
@@ -164,7 +164,7 @@
 		}
 	```
 
-- [ ] Create a web application in the Edge Resources: POST/application_instance request with the following body:
+- [ ] Create a web application in the Edge Resources: POST/application_instance request with the compute_id of the previous step, tenant_id from the first step and with the following body:
 
 	```
 		{
@@ -204,7 +204,7 @@
 		}
 	```
 
-- [ ] Read the information of the created application and look for the IP and port (nodePort) to access it from your browser at `http://192.168.14.211:26379` or generate traffic outside of the cluster: GET/application_instance/{application_instance_id}, GET/compute requests.
+- [ ] Read the information of the created application and look for the IP and port (nodePort) to access it from your browser at `http://192.168.14.211:26379` : GET/application_instance/{application_instance_id}, GET/compute requests.
 
 - [ ] Test connection between UE and web-app by performing a wget request from the UE: POST/client_infrastructure/{uesimbox}/action request with the following body request:
 	```
