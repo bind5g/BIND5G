@@ -10,7 +10,8 @@ To navigate into the NaaS-API open your browser here:
  - If it contains the world `amarisoft` or `Amarisoft`, Radio Client, Radio Access Network, Core Network, and Telemetry Resources will be available for the Tenant.
  - If it contains the world `topology` or `Topology`, Radio Client, Radio Access Network, Core Network, and Telemetry Resources will be available for the Tenant.
  - If it contains the world fembms or FeMBMS, Radio Client, Radio Access Network, Core Network, and Telemetry Resources will be available for the Tenant.
- - If it contains `edge` or `Edge` and `amarisoft` or `Amarisoft` and `topology` or `Topology` and `fembms` or `FeMBMS`, then the corresponding resources will be available to the Tenant.
+ - If it contains `edge` or `Edge` and `amarisoft` or `Amarisoft` and `topology` or `Topology` and `fembms` or `FeMBMS`, then ALL the corresponding resources will be available to the Tenant.
+ - If it contains `bind5g` Central-BIND5G-Thanos endpoint (URL) will be available in the GET/telemetry request
  
  The **POST/tenant** request results in the creation of the tenant with a `tenant_id`.
  
@@ -19,8 +20,8 @@ To navigate into the NaaS-API open your browser here:
 	| Name | Value type| Example| Comments
 	|--|--|--|--|
 	|  mode| *string* | "HoSA"| can be either "HoSA" or "Ho4g" or "5gSA" or "5gNSA" or "Slice"
-	| type|*string*| "amarisoft" | can be anything, but descriptive
-	| extraParams|*{}*| - |extraParams is a json dictionary and is described in a seperate table below
+	| type|*string*| "amarisoft" | must be "amarisoft"
+	| extraParams|*{}*| - |extraParams is a json dictionary and is described in a seperate table (to be defined), can be left empty for the moment
 
 The **POST/core_network** request results in the creation of the core network with a `core_id`.
 
@@ -29,10 +30,10 @@ The **POST/core_network** request results in the creation of the core network wi
 	| Name | Value type| Example| Comments
 	|--|--|--|--|
 	|  mode| *string* | "HoSA"| can be either "HoSA" or "Ho4g" or "5gSA" or "5gNSA" or "Slice"
-	| type|*string*| "amarisoft" | can be anything, but descriptive
-	| frequency| *integer*| | Units in MHz
-	| bandwidth| *integer* | | Units in Hz
-	| extraParams|*{}*| - |extraParams is a json dictionary and is described in a seperate table below	
+	| type|*string*| "amarisoft" | must be "amarisoft"
+	| frequency| *integer*| 20| Units in MHz
+	| bandwidth| *integer* |3900 | Units in Hz
+	| extraParams|*{}*| - |extraParams is a json dictionary and is described in a seperate table (to be defined), can be left empty for the moment
 
 The **POST/ran_infrastructure** request results in the creation of the gNB with a `ran_id`.
 
@@ -45,7 +46,7 @@ The **POST/ran_infrastructure** request results in the creation of the gNB with 
 	| frequency| *integer*| 20| Units in MHz
 	| bandwidth| *integer* |3900 | Units in Hz
 	| uenumber| *integer* |7| Total available number of UEs to be launched
-	| extraParams|*{}*| - |extraParams is a json dictionary and is described in a seperate table below	
+	| extraParams|*{}*| - |extraParams is a json dictionary and is described in a seperate table (to be defined), can be left empty for the moment	
 
 The **POST/client_infrastructure** request results in the creation of the client (aka UE) with a `client_id` and a `client_infrastructure_id`. However, the client(s) is offline. To make the client(s) active a **POST/client_infrastructure/{client_infrastructure_id}/action** request is required.
 
@@ -61,7 +62,7 @@ The **POST/client_infrastructure** request results in the creation of the client
 	| Name | Value type| Example| Comments
 	|--|--|--|--|
 	|  actionParameters| {"ueID":"", params: "[]"} | "ueID":"1", params: "["ip:port"]"| `params` depends on the specific action
-	| actionType|*string*| "start_traffic" | can be either "start_traffic" or "" or "" or ""
+	| actionType|*string*| "start_traffic" | can be either "start_traffic" or "" or "" or "" (to be defined)
 
 > NOTE: More information about the actionType can be found here.
 
@@ -101,8 +102,9 @@ The **POST/compute** request results in the creation of the Edge resources with 
 	| container_ram_limit| *string* | "50Mi" | units in Mebibytes
 	| container_cpu_request| *string* | "40m" | units in millicores
 	| container_ram_request|  *string* | "25Mi" | units in Mebibytes
-	| servicemonitor | *{}*| {"enable": "True", "interval": "5s"} | for Prometheus exporter or Pushgateways to connect the metrics to a Prometheus server
+	| servicemonitor | *{}*| {"enable": "True", "interval": "5s"} | for Prometheus exporter or Pushgateways to connect the metrics to a Prometheus server. parameter "labels" must have a key-value pair as follows: "release": "prometheus-bind5g-vicomtech"
 	| helm_chart | *{}*| {"enable": "False", "kns_name": "", "nsd_name": "", "vim_name": "", "k8s_namespace": ""} | Deployment of Helm-Charts, If "enable" is "True". kns_name value must be the same as the application_name parameters, and k8s_namespace value must be the same as the compute_id parameter
+	| volumes | *{}*| {"volume_name": "kafka_metrics", "container_path": "/prometheus", "host_path": "/home/ubuntu/v3-cognitive-iot/prometheus-metrics-for-kafka/"} | Deployment of volumes, the folder to be mount in the container must exist in the Vicomtech´s Kubernetes Node machine
 
 > NOTE: The application can contain only one container. Pairs of the extraParams that are not necessary can be deleted.
 
