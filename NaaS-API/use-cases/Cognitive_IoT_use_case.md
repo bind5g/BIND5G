@@ -127,12 +127,13 @@ Response:
 {
 		"application_description": {
 			"application_name": "kafka-broker2",
-			"compute_id": "4a0b826c-699f-11ed-b7f8-0242ac1d000a",
+			"compute_id": "fd1d77de-6b46-11ed-b89c-0242ac150009",
 			"extraParams": {
 				"labels": {
 					"app": "kafka",
                                         "id": "0",
-                                        "name": "kafka"
+                                        "name": "kafka",
+                                        "release": "prometheus-bind5g-vicomtech"
 					},
 				"replicas": 1,
                                 "container_cpu_request": "250m",
@@ -141,6 +142,12 @@ Response:
                                 "container_ram_limit": "2048Mi",
 				"service_type": "NodePort",
 				"service_ports": [
+                                        [
+					{"port": 1234},
+					{"targetPort": 1234},
+					{"name": "metrics"},
+                                        {"nodePort": 0}
+				       ],
                                        [
 					{"port": 9092},
 					{"targetPort": 9092},
@@ -155,8 +162,13 @@ Response:
                                        ]
 				      ],
 				"servicemonitor": {
-					"enable": "False",
-					"interval": ""
+					"enable": "True",
+					"interval": "10s"
+					},
+                                "volumes": {
+					"volume_name": "prometheus-metrics",
+					"container_path": "/prometheus",
+                                        "host_path": "/home/ubuntu/v3-cognitive-iot/prometheus-metrics-for-kafka"
 					},
 				"env": [
                                         [{"name":"KAFKA_LISTENERS"},{"value":"INTERNAL://:9092,mec://:29093"}],
@@ -165,7 +177,8 @@ Response:
                                         [{"name":"KAFKA_INTER_BROKER_LISTENER_NAME"},{"value":"INTERNAL"}],
                                         [{"name":"KAFKA_ZOOKEEPER_CONNECT"},{"value":"zoo1:2181"}],
                                         [{"name":"KAFKA_BROKER_ID"},{"value":"0"}],
-                                        [{"name":"KAFKA_CREATE_TOPICS"},{"value":"upsampling:15:1,f-extraction:9:1,ml:1:1"}]
+                                        [{"name":"KAFKA_CREATE_TOPICS"},{"value":"upsampling:4:1,f-extraction:4:1,ml:1:1"}],
+                                        [{"name":"EXTRA_ARGS"},{"value":"-javaagent:/prometheus/jmx_prometheus_javaagent-0.15.0.jar=1234:/prometheus/kafka-broker.yml"}]
                                        ],
 				"helm_chart": {
 					"enable": "False",
@@ -178,7 +191,7 @@ Response:
 			"image_name": "wurstmeister/kafka",
 			"ports": [9092, 29093]
 		},
-		"tenant_id": "a7547b24-699e-11ed-9496-0242ac1d000a"
+		"tenant_id": "d759d9ec-6b46-11ed-9741-0242ac150009"
 	}
 ````
 
