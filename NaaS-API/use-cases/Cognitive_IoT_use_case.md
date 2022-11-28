@@ -127,7 +127,7 @@ Response:
 {
 		"application_description": {
 			"application_name": "kafka-broker2",
-			"compute_id": "fd1d77de-6b46-11ed-b89c-0242ac150009",
+			"compute_id": "4a0b826c-699f-11ed-b7f8-0242ac1d000a",
 			"extraParams": {
 				"labels": {
 					"app": "kafka",
@@ -191,7 +191,7 @@ Response:
 			"image_name": "wurstmeister/kafka",
 			"ports": [9092, 29093]
 		},
-		"tenant_id": "d759d9ec-6b46-11ed-9741-0242ac150009"
+		"tenant_id": "a7547b24-699e-11ed-9496-0242ac1d000a"
 	}
 ````
 
