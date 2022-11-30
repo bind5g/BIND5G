@@ -108,6 +108,7 @@ The **POST/compute** request results in the creation of the Edge resources with 
 
 > NOTE: The application can contain only one container. Pairs of the extraParams that are not necessary can be deleted.
 > NOTE: The Infrastructure Provider can confirm that the application has been deployed in the MEC machine with the `kubectl get pods -n compute_id` ,`kubectl get deploy -n compute_id`, `kubectl get service -n compute_id`, `kubectl get servicemonitor -n compute_id` commands in the terminal of the MEC machine.
+> NOTE: If the application fails to be deployed in the Kubernetes cluster one reason could be that it consumes more resources (RAM and CPU) from the defaults that have been assigned within the creating of the edge-namespace resources. Each namespace creates a rule that every Pod or Deployment that is created in the cluster and does not specify the container_cpu, container_ram request/limit it will be assigned with the defaults: cpu_default_limit=500milicores, cpu_default_request=100milicores, RAM_default_limit=512Mi, RAM_default_request=50Mi .
 
 The **POST/application_instance** request results in the creation of the application with an `application_id`. 
 
