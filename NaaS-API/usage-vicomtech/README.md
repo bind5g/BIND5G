@@ -1,4 +1,4 @@
-﻿## Usage
+﻿## Usage of NaaS-API
 
 The following steps help you use the NaaS-API through the UI.
 To navigate into the NaaS-API open your browser here:
