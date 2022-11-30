@@ -76,7 +76,7 @@ The **POST/client_infrastructure** request results in the creation of the client
 	| storage| *integer* |1 | Units in GB
 	| extraParams|*{}*| - |extraParams is a json dictionary and can be left empty.	
 
-> NOTE: The Edge Resources create Kubernetes-based Namespaces in an already running Kubernetes cluster.
+> NOTE: The Edge Resources create Kubernetes-based Namespaces in an already running Kubernetes cluster. The Infrastructure Provider can confirm it with the `kubectl get ns` command in the terminal of the MEC machine.
 
 The **POST/compute** request results in the creation of the Edge resources with a `compute_id`. 
 
@@ -103,10 +103,11 @@ The **POST/compute** request results in the creation of the Edge resources with 
 	| container_cpu_request| *string* | "40m" | units in millicores
 	| container_ram_request|  *string* | "25Mi" | units in Mebibytes
 	| servicemonitor | *{}*| {"enable": "True", "interval": "5s"} | for Prometheus exporter or Pushgateways to connect the metrics to a Prometheus server. parameter "labels" must have a key-value pair as follows: "release": "prometheus-bind5g-vicomtech"
-	| helm_chart | *{}*| {"enable": "False", "kns_name": "", "nsd_name": "", "vim_name": "", "k8s_namespace": ""} | Deployment of Helm-Charts, If "enable" is "True". kns_name value must be the same as the application_name parameters, and k8s_namespace value must be the same as the compute_id parameter
+	| helm_chart | *{}*| {"enable": "False", "kns_name": "", "nsd_name": "zookeeper_vicomtech_ns", "vim_name": "bind5g-vim", "k8s_namespace": ""} | Deployment of Helm-Charts, If "enable" is "True". kns_name value must be the same as the application_name parameters, and k8s_namespace value must be the same as the compute_id parameter. The nsd_name is the name of the network service package in the OSM
 	| volumes | *{}*| {"volume_name": "kafka_metrics", "container_path": "/prometheus", "host_path": "/home/ubuntu/v3-cognitive-iot/prometheus-metrics-for-kafka/"} | Deployment of volumes, the folder to be mount in the container must exist in the Vicomtech´s Kubernetes Node machine
 
 > NOTE: The application can contain only one container. Pairs of the extraParams that are not necessary can be deleted.
+> NOTE: The Infrastructure Provider can confirm that the application has been deployed in the MEC machine with the `kubectl get pods -n compute_id` ,`kubectl get deploy -n compute_id`, `kubectl get service -n compute_id`, `kubectl get servicemonitor -n compute_id` commands in the terminal of the MEC machine.
 
 The **POST/application_instance** request results in the creation of the application with an `application_id`. 
 
