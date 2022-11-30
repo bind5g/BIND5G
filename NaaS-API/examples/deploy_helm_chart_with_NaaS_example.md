@@ -70,7 +70,7 @@ Response:
   "applicationID: e8ad77c2-6ccb-11ed-8958-0242ac19000a, applicationName: zookeeper-v3, imageName: zookeeper_image , computeID: 506f18a8-6cc4-11ed-ad34-0242ac190009 , port: [8080] , tenantID: 24f05cec-6cc4-11ed-8693-0242ac190009, status: helm chart deployed"
 ]
 ````
-> NOTE: The Infrastructure Provider can check if the manifests of the chart have been deployed with the `kubectl get pods -n compute_id`, `kubectl get deployment -n compute_id`, `kubectl get servicemonitor -n compute_id` commands. If the deployment exists but the container is failing to be created or to start, delete the application and the edge resources and create new edge resources with more RAM.
+> NOTE: The Infrastructure Provider can check if the manifests of the chart have been deployed with the `kubectl get pods -n compute_id`, `kubectl get deployment -n compute_id`, `kubectl get servicemonitor -n compute_id` commands. If the deployment exists but the container is failing to be created or to start, delete the application and the edge resources and create new edge resources with more RAM. The compute_id in the above exampe is 506f18a8-6cc4-11ed-ad34-0242ac190009 .
 
 
 ## Upgrade (DAY2 actions) a MEC application based on a helm-chart and its values.yaml file
