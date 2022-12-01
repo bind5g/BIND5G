@@ -64,6 +64,35 @@
  
  SITE 2
  
- - [ ] Navigate to the NaaS-API UI with your preferred browser:
-	 `http://testbed2_ip:testbed2_port/v0/ui`
-- [ ] Create Edge Resources: POST/compute request with the following body request:
+ - [ ] Use the following base URL for subsequent requests:
+	 `http://10.98.6.188:5000`
+
+ - [ ] Create a Tenant in the new site: POST/tenant request
+	```
+	{
+	  "description": "Example E2E BIND5G experiment ",
+	  "name": "federated_edge_amarisoft_bind5g"
+	}
+	```
+
+ - [ ] Create Edge Resources: POST/compute request with the following body request, choosing the compute data:
+   ```
+	{
+		"tenant_id": "987654321",
+		"compute_description": {
+			"compute_type": "osm",
+			"compute_data": {"cpus": "9", "ram": "10240"}
+		}
+	}
+   ```
+
+ - [ ] Create Application Instance: POST/application_instance with the following body request, using the corresponding Helm Chart name, and using compute_id received from the above POST/compute request:
+    ```
+   	{
+		"application_description": {
+			"compute_id": "3",
+			"image_name":"helm/chart",
+			"application_name":"myapp"
+		}
+	}
+   ```
