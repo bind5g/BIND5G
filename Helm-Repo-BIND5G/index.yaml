@@ -3,7 +3,7 @@ entries:
   feature_extraction:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-12-15T16:56:08.233973706+01:00"
+    created: "2022-12-19T13:15:57.291312529+01:00"
     description: A Helm chart for Kubernetes
     digest: 938e9a8988ce0ab68816513156c3d5f678821a698e85b8b24e8998c292e4062b
     name: feature_extraction
@@ -14,7 +14,7 @@ entries:
   kafka:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-12-15T16:56:08.234327952+01:00"
+    created: "2022-12-19T13:15:57.291711684+01:00"
     description: A Helm chart for Kubernetes
     digest: 062d4f2e3c32cb158fdf936a3ca80eedfb0de3602a562944fb045edf2b26dc3b
     name: kafka
@@ -25,7 +25,7 @@ entries:
   ml:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-12-15T16:56:08.234623734+01:00"
+    created: "2022-12-19T13:15:57.292009727+01:00"
     description: A Helm chart for Kubernetes
     digest: db1a69dd05c7244f7055453728c28d88d8ccaca97c0d5ab1ed1938f702db162c
     name: ml
@@ -36,17 +36,28 @@ entries:
   mosquitto:
   - apiVersion: v2
     appVersion: 2.0.11
-    created: "2022-12-15T16:56:08.237669845+01:00"
+    created: "2022-12-19T13:15:57.295079975+01:00"
     description: Eclipse Mosquitto - An open source MQTT broker
     digest: baba902c9f6621ee083e236c8a879e251bd390ecfe824a61aeee7205bf73e166
     name: mosquitto
     urls:
     - mosquitto-4.3.2.tgz
     version: 4.3.2
+  mqtt-subscriber:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2022-12-19T13:15:57.295259811+01:00"
+    description: helm chart for mqtt subscriber
+    digest: 38cbf68b349873659db1565d37a4170964c27292259af27cd8d837d0457eeecb
+    name: mqtt-subscriber
+    type: application
+    urls:
+    - mqtt-subscriber-0.1.0.tgz
+    version: 0.1.0
   nginx-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-12-15T16:56:08.238366899+01:00"
+    created: "2022-12-19T13:15:57.29591425+01:00"
     description: A Helm chart for Kubernetes
     digest: 168743b0ec846e248eb33d389cee70714579e320fa0c4436a35158cc44f31efa
     name: nginx-chart
@@ -57,7 +68,7 @@ entries:
   pushgateway:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-12-15T16:56:08.238658532+01:00"
+    created: "2022-12-19T13:15:57.298828651+01:00"
     description: A Helm chart for Kubernetes
     digest: c6618f9c78b9e7f8477ca673a082b46fbabe6dc2f79dc0fdf8e226f8428cdfe0
     name: pushgateway
@@ -68,7 +79,7 @@ entries:
   upsampling:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-12-15T16:56:08.238931988+01:00"
+    created: "2022-12-19T13:15:57.29945918+01:00"
     description: A Helm chart for Kubernetes
     digest: 4485e99f6084e03ce16dce34512331aa21109388620b9c43481981e512c69777
     name: upsampling
@@ -79,7 +90,7 @@ entries:
   zookeeper:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-12-15T16:56:08.239190194+01:00"
+    created: "2022-12-19T13:15:57.300045832+01:00"
     description: A Helm chart for Kubernetes
     digest: df1c01f7895c055be46f50356ffa53de9da25151af1462476a8e765a50b2d960
     name: zookeeper
@@ -87,4 +98,4 @@ entries:
     urls:
     - zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2022-12-15T16:56:08.233437046+01:00"
+generated: "2022-12-19T13:15:57.290577003+01:00"
