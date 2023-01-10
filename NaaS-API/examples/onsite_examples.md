@@ -85,6 +85,17 @@
 		"scaletype": "Horizontal"
 	}
 	```
+	or
+
+ - [ ] Scale CPU and memory the web application: POST/application_instance/{application_instance_id}/scale with the following body request:
+	```
+	{
+		"new_cpu": "10m",
+		"new_memory": "5Mi",
+		"replicas": 0,
+		"scaletype": "Vertical"
+	}
+	```
 	
 
   **Connect a UE to a web-app running on the Edge over a 5G SA mobile network**
