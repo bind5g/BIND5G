@@ -45,7 +45,7 @@
 					"service_ports": [[
 						{"port": 8080},
 						{"targetPort": 8080},
-						{"name": "external"},
+						{"name": "external"}
 						]
 					],
 					"servicemonitor": {
