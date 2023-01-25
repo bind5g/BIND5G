@@ -1,9 +1,20 @@
 apiVersion: v1
 entries:
+  example:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-01-25T16:45:24.431661502+01:00"
+    description: A Helm chart for Kubernetes
+    digest: ad7ab048abc82310ca65365fc6c73badc3fd70a9f0e3045231b3d38330166adf
+    name: example
+    type: application
+    urls:
+    - example-0.1.0.tgz
+    version: 0.1.0
   feature_extraction:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-19T12:43:47.663781127+01:00"
+    created: "2023-01-25T16:45:24.432514385+01:00"
     description: A Helm chart for Kubernetes
     digest: 938e9a8988ce0ab68816513156c3d5f678821a698e85b8b24e8998c292e4062b
     name: feature_extraction
@@ -14,7 +25,7 @@ entries:
   kafka:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-19T12:43:47.663940151+01:00"
+    created: "2023-01-25T16:45:24.433014225+01:00"
     description: A Helm chart for Kubernetes
     digest: 7f271a265b7336e7429595732a6f5e592b1e8f20b24f29aef3e458e33bc622ee
     name: kafka
@@ -25,7 +36,7 @@ entries:
   ml:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-19T12:43:47.66408945+01:00"
+    created: "2023-01-25T16:45:24.433394137+01:00"
     description: A Helm chart for Kubernetes
     digest: db1a69dd05c7244f7055453728c28d88d8ccaca97c0d5ab1ed1938f702db162c
     name: ml
@@ -36,7 +47,7 @@ entries:
   mosquitto:
   - apiVersion: v2
     appVersion: 2.0.11
-    created: "2023-01-19T12:43:47.665542796+01:00"
+    created: "2023-01-25T16:45:24.435360338+01:00"
     description: Eclipse Mosquitto - An open source MQTT broker
     digest: baba902c9f6621ee083e236c8a879e251bd390ecfe824a61aeee7205bf73e166
     name: mosquitto
@@ -46,7 +57,7 @@ entries:
   mqtt-subscriber:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-01-19T12:43:47.665629253+01:00"
+    created: "2023-01-25T16:45:24.435589503+01:00"
     description: helm chart for mqtt subscriber
     digest: 38cbf68b349873659db1565d37a4170964c27292259af27cd8d837d0457eeecb
     name: mqtt-subscriber
@@ -57,7 +68,7 @@ entries:
   nginx-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-19T12:43:47.665918404+01:00"
+    created: "2023-01-25T16:45:24.436300163+01:00"
     description: A Helm chart for Kubernetes
     digest: 168743b0ec846e248eb33d389cee70714579e320fa0c4436a35158cc44f31efa
     name: nginx-chart
@@ -68,7 +79,7 @@ entries:
   pushgateway:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-19T12:43:47.666062982+01:00"
+    created: "2023-01-25T16:45:24.436777549+01:00"
     description: A Helm chart for Kubernetes
     digest: c6618f9c78b9e7f8477ca673a082b46fbabe6dc2f79dc0fdf8e226f8428cdfe0
     name: pushgateway
@@ -79,7 +90,7 @@ entries:
   upsampling:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-19T12:43:47.666195887+01:00"
+    created: "2023-01-25T16:45:24.437248746+01:00"
     description: A Helm chart for Kubernetes
     digest: 4485e99f6084e03ce16dce34512331aa21109388620b9c43481981e512c69777
     name: upsampling
@@ -90,7 +101,7 @@ entries:
   zookeeper:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-19T12:43:47.666330325+01:00"
+    created: "2023-01-25T16:45:24.437720495+01:00"
     description: A Helm chart for Kubernetes
     digest: df1c01f7895c055be46f50356ffa53de9da25151af1462476a8e765a50b2d960
     name: zookeeper
@@ -98,4 +109,4 @@ entries:
     urls:
     - zookeeper-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-19T12:43:47.663515265+01:00"
+generated: "2023-01-25T16:45:24.431225034+01:00"
