@@ -3,7 +3,7 @@ entries:
   example:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-30T13:28:10.477389239+01:00"
+    created: "2023-01-30T13:35:18.378994674+01:00"
     description: A Helm chart for Kubernetes
     digest: ad7ab048abc82310ca65365fc6c73badc3fd70a9f0e3045231b3d38330166adf
     name: example
@@ -14,7 +14,7 @@ entries:
   feature_extraction:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-30T13:28:10.47753399+01:00"
+    created: "2023-01-30T13:35:18.379137454+01:00"
     description: A Helm chart for Kubernetes
     digest: 938e9a8988ce0ab68816513156c3d5f678821a698e85b8b24e8998c292e4062b
     name: feature_extraction
@@ -25,7 +25,7 @@ entries:
   iperf3:
   - apiVersion: v2
     appVersion: 3.0.0
-    created: "2023-01-30T13:28:10.477693695+01:00"
+    created: "2023-01-30T13:35:18.379289784+01:00"
     description: IPerf3 server to benchmark kubernetes networking
     digest: c5f93aefde5affcad09c97bcb85ac93cf05306733c18c02265e5a8380f09820a
     home: https://iperf.fr/iperf-download.php
@@ -42,7 +42,7 @@ entries:
   kafka:
   - apiVersion: v1
     appVersion: 5.0.1
-    created: "2023-01-30T13:28:10.479820223+01:00"
+    created: "2023-01-30T13:35:18.381378315+01:00"
     dependencies:
     - condition: kafka.zookeeper.enabled,zookeeper.enabled
       name: zookeeper
@@ -67,9 +67,36 @@ entries:
     urls:
     - kafka-0.21.5.tgz
     version: 0.21.5
+  - apiVersion: v1
+    appVersion: 5.0.1
+    created: "2023-01-30T13:35:18.38349693+01:00"
+    dependencies:
+    - condition: kafka.zookeeper.enabled,zookeeper.enabled
+      name: zookeeper
+      repository: file://../zookeeper
+      version: 2.1.6
+    deprecated: true
+    description: DEPRECATED Apache Kafka is publish-subscribe messaging rethought
+      as a distributed commit log.
+    digest: de0070aeb12a3220a3f91a2f727e6d5420dd021bf1f6925beca5c530a16d8e98
+    home: https://kafka.apache.org/
+    icon: https://kafka.apache.org/images/logo.png
+    keywords:
+    - kafka
+    - zookeeper
+    - kafka statefulset
+    name: kafka
+    sources:
+    - https://github.com/kubernetes/charts/tree/master/incubator/zookeeper
+    - https://github.com/Yolean/kubernetes-kafka
+    - https://github.com/confluentinc/cp-docker-images
+    - https://github.com/apache/kafka
+    urls:
+    - kafkaceit-0.21.5.tgz
+    version: 0.21.5
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-30T13:28:10.477860207+01:00"
+    created: "2023-01-30T13:35:18.379447964+01:00"
     description: A Helm chart for Kubernetes
     digest: 7f271a265b7336e7429595732a6f5e592b1e8f20b24f29aef3e458e33bc622ee
     name: kafka
@@ -80,7 +107,7 @@ entries:
   kafka_vicomtech:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-30T13:28:10.480002362+01:00"
+    created: "2023-01-30T13:35:18.381537681+01:00"
     description: A Helm chart for Kubernetes
     digest: 7fd445e63099bc23d5c43a395d4fd2d3985874e874c9d3cfbbdf0bbf4511579f
     name: kafka_vicomtech
@@ -91,7 +118,7 @@ entries:
   ml:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-30T13:28:10.480138983+01:00"
+    created: "2023-01-30T13:35:18.383650106+01:00"
     description: A Helm chart for Kubernetes
     digest: db1a69dd05c7244f7055453728c28d88d8ccaca97c0d5ab1ed1938f702db162c
     name: ml
@@ -102,7 +129,7 @@ entries:
   mosquitto:
   - apiVersion: v2
     appVersion: 2.0.11
-    created: "2023-01-30T13:28:10.481867833+01:00"
+    created: "2023-01-30T13:35:18.385685163+01:00"
     description: Eclipse Mosquitto - An open source MQTT broker
     digest: baba902c9f6621ee083e236c8a879e251bd390ecfe824a61aeee7205bf73e166
     name: mosquitto
@@ -112,7 +139,7 @@ entries:
   mqtt-subscriber:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-01-30T13:28:10.482124277+01:00"
+    created: "2023-01-30T13:35:18.385777036+01:00"
     description: helm chart for mqtt subscriber
     digest: 38cbf68b349873659db1565d37a4170964c27292259af27cd8d837d0457eeecb
     name: mqtt-subscriber
@@ -123,7 +150,7 @@ entries:
   nginx-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-30T13:28:10.482429412+01:00"
+    created: "2023-01-30T13:35:18.386090232+01:00"
     description: A Helm chart for Kubernetes
     digest: 168743b0ec846e248eb33d389cee70714579e320fa0c4436a35158cc44f31efa
     name: nginx-chart
@@ -134,7 +161,7 @@ entries:
   pushgateway:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-30T13:28:10.482570329+01:00"
+    created: "2023-01-30T13:35:18.386229752+01:00"
     description: A Helm chart for Kubernetes
     digest: c6618f9c78b9e7f8477ca673a082b46fbabe6dc2f79dc0fdf8e226f8428cdfe0
     name: pushgateway
@@ -145,7 +172,7 @@ entries:
   upsampling:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-30T13:28:10.48275296+01:00"
+    created: "2023-01-30T13:35:18.38636062+01:00"
     description: A Helm chart for Kubernetes
     digest: 4485e99f6084e03ce16dce34512331aa21109388620b9c43481981e512c69777
     name: upsampling
@@ -156,7 +183,7 @@ entries:
   zookeeper:
   - apiVersion: v1
     appVersion: 3.5.5
-    created: "2023-01-30T13:28:10.483749819+01:00"
+    created: "2023-01-30T13:35:18.387281793+01:00"
     deprecated: true
     description: DEPRECATED Centralized service for maintaining configuration information,
       naming, providing distributed synchronization, and providing group services.
@@ -173,7 +200,7 @@ entries:
     version: 2.1.6
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-30T13:28:10.482895675+01:00"
+    created: "2023-01-30T13:35:18.386485596+01:00"
     description: A Helm chart for Kubernetes
     digest: df1c01f7895c055be46f50356ffa53de9da25151af1462476a8e765a50b2d960
     name: zookeeper
@@ -184,7 +211,7 @@ entries:
   zookeeper_vicomtech:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-30T13:28:10.483896681+01:00"
+    created: "2023-01-30T13:35:18.387414791+01:00"
     description: A Helm chart for Kubernetes
     digest: 779c1436f5125fef5e11c2a2c30526a2fd1f6abee05162a42e219feb20df506c
     name: zookeeper_vicomtech
@@ -192,4 +219,4 @@ entries:
     urls:
     - zookeeper_vicomtech-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-30T13:28:10.47699482+01:00"
+generated: "2023-01-30T13:35:18.378600506+01:00"
