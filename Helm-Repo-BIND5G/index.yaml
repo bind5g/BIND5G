@@ -3,7 +3,7 @@ entries:
   example:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-14T10:57:55.778444063+01:00"
+    created: "2023-02-14T11:04:29.607554594+01:00"
     description: A Helm chart for Kubernetes
     digest: ad7ab048abc82310ca65365fc6c73badc3fd70a9f0e3045231b3d38330166adf
     name: example
@@ -14,7 +14,7 @@ entries:
   feature_extraction:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-14T10:57:55.77866507+01:00"
+    created: "2023-02-14T11:04:29.607751404+01:00"
     description: A Helm chart for Kubernetes
     digest: 938e9a8988ce0ab68816513156c3d5f678821a698e85b8b24e8998c292e4062b
     name: feature_extraction
@@ -25,7 +25,7 @@ entries:
   iperf3:
   - apiVersion: v2
     appVersion: 3.0.0
-    created: "2023-02-14T10:57:55.778877132+01:00"
+    created: "2023-02-14T11:04:29.607952246+01:00"
     description: IPerf3 server to benchmark kubernetes networking
     digest: c5f93aefde5affcad09c97bcb85ac93cf05306733c18c02265e5a8380f09820a
     home: https://iperf.fr/iperf-download.php
@@ -42,7 +42,7 @@ entries:
   kafka:
   - apiVersion: v1
     appVersion: 5.0.1
-    created: "2023-02-14T10:57:55.781707781+01:00"
+    created: "2023-02-14T11:04:29.613600178+01:00"
     dependencies:
     - condition: kafka.zookeeper.enabled,zookeeper.enabled
       name: zookeeper
@@ -69,7 +69,7 @@ entries:
     version: 0.21.5
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-14T10:57:55.77909963+01:00"
+    created: "2023-02-14T11:04:29.608163899+01:00"
     description: A Helm chart for Kubernetes
     digest: 7f271a265b7336e7429595732a6f5e592b1e8f20b24f29aef3e458e33bc622ee
     name: kafka
@@ -80,7 +80,7 @@ entries:
   kafka_vicomtech:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-14T10:57:55.781936596+01:00"
+    created: "2023-02-14T11:04:29.614247334+01:00"
     description: A Helm chart for Kubernetes
     digest: 7fd445e63099bc23d5c43a395d4fd2d3985874e874c9d3cfbbdf0bbf4511579f
     name: kafka_vicomtech
@@ -91,7 +91,7 @@ entries:
   kafkaceit:
   - apiVersion: v1
     appVersion: 5.0.1
-    created: "2023-02-14T10:57:55.785082521+01:00"
+    created: "2023-02-14T11:04:29.616828298+01:00"
     dependencies:
     - condition: kafka.zookeeper.enabled,zookeeper.enabled
       name: zookeeper
@@ -119,7 +119,7 @@ entries:
   kafkaceit2:
   - apiVersion: v1
     appVersion: 5.0.1
-    created: "2023-02-14T10:57:55.789585434+01:00"
+    created: "2023-02-14T11:04:29.622029996+01:00"
     dependencies:
     - condition: kafka.zookeeper.enabled,zookeeper.enabled
       name: zookeeper
@@ -144,10 +144,38 @@ entries:
     urls:
     - kafkaceit2.tgz
     version: 0.21.5
+  kafkav2:
+  - apiVersion: v1
+    appVersion: 5.0.1
+    created: "2023-02-14T11:04:29.610939048+01:00"
+    dependencies:
+    - condition: kafka.zookeeper.enabled,zookeeper.enabled
+      name: zookeeper
+      repository: file://../zookeeper
+      version: 2.1.6
+    deprecated: true
+    description: DEPRECATED Apache Kafka is publish-subscribe messaging rethought
+      as a distributed commit log.
+    digest: 5cda91442fb6edc802efbd8765cc20a9313b94387a7acf6c94772ace1885e930
+    home: https://kafka.apache.org/
+    icon: https://kafka.apache.org/images/logo.png
+    keywords:
+    - kafka
+    - zookeeper
+    - kafka statefulset
+    name: kafkav2
+    sources:
+    - https://github.com/kubernetes/charts/tree/master/incubator/zookeeper
+    - https://github.com/Yolean/kubernetes-kafka
+    - https://github.com/confluentinc/cp-docker-images
+    - https://github.com/apache/kafka
+    urls:
+    - kafka-0.21.5-v2.tgz
+    version: 0.21.5
   ml:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-14T10:57:55.78976926+01:00"
+    created: "2023-02-14T11:04:29.622224371+01:00"
     description: A Helm chart for Kubernetes
     digest: db1a69dd05c7244f7055453728c28d88d8ccaca97c0d5ab1ed1938f702db162c
     name: ml
@@ -158,7 +186,7 @@ entries:
   mosquitto:
   - apiVersion: v2
     appVersion: 2.0.11
-    created: "2023-02-14T10:57:55.791973354+01:00"
+    created: "2023-02-14T11:04:29.624118866+01:00"
     description: Eclipse Mosquitto - An open source MQTT broker
     digest: baba902c9f6621ee083e236c8a879e251bd390ecfe824a61aeee7205bf73e166
     name: mosquitto
@@ -168,7 +196,7 @@ entries:
   mqtt-subscriber:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-02-14T10:57:55.79209654+01:00"
+    created: "2023-02-14T11:04:29.624236786+01:00"
     description: helm chart for mqtt subscriber
     digest: 38cbf68b349873659db1565d37a4170964c27292259af27cd8d837d0457eeecb
     name: mqtt-subscriber
@@ -179,7 +207,7 @@ entries:
   nginx-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-14T10:57:55.792813971+01:00"
+    created: "2023-02-14T11:04:29.624717518+01:00"
     description: A Helm chart for Kubernetes
     digest: 168743b0ec846e248eb33d389cee70714579e320fa0c4436a35158cc44f31efa
     name: nginx-chart
@@ -190,7 +218,7 @@ entries:
   pushgateway:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-14T10:57:55.793141712+01:00"
+    created: "2023-02-14T11:04:29.624936955+01:00"
     description: A Helm chart for Kubernetes
     digest: c6618f9c78b9e7f8477ca673a082b46fbabe6dc2f79dc0fdf8e226f8428cdfe0
     name: pushgateway
@@ -201,7 +229,7 @@ entries:
   upsampling:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-14T10:57:55.793336926+01:00"
+    created: "2023-02-14T11:04:29.625115035+01:00"
     description: A Helm chart for Kubernetes
     digest: 4485e99f6084e03ce16dce34512331aa21109388620b9c43481981e512c69777
     name: upsampling
@@ -212,7 +240,7 @@ entries:
   zookeeper:
   - apiVersion: v1
     appVersion: 3.5.5
-    created: "2023-02-14T10:57:55.794634571+01:00"
+    created: "2023-02-14T11:04:29.626397704+01:00"
     deprecated: true
     description: DEPRECATED Centralized service for maintaining configuration information,
       naming, providing distributed synchronization, and providing group services.
@@ -229,7 +257,7 @@ entries:
     version: 2.1.6
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-14T10:57:55.79352708+01:00"
+    created: "2023-02-14T11:04:29.625322303+01:00"
     description: A Helm chart for Kubernetes
     digest: df1c01f7895c055be46f50356ffa53de9da25151af1462476a8e765a50b2d960
     name: zookeeper
@@ -240,7 +268,7 @@ entries:
   zookeeper_vicomtech:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-14T10:57:55.794822688+01:00"
+    created: "2023-02-14T11:04:29.626583532+01:00"
     description: A Helm chart for Kubernetes
     digest: 779c1436f5125fef5e11c2a2c30526a2fd1f6abee05162a42e219feb20df506c
     name: zookeeper_vicomtech
@@ -248,4 +276,4 @@ entries:
     urls:
     - zookeeper_vicomtech-0.1.0.tgz
     version: 0.1.0
-generated: "2023-02-14T10:57:55.77080049+01:00"
+generated: "2023-02-14T11:04:29.606990404+01:00"
